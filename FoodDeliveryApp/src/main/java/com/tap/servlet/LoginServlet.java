@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 
 public class LoginServlet extends HttpServlet {
@@ -17,6 +18,7 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		HttpSession session = req.getSession();
 		
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
@@ -40,7 +42,12 @@ public class LoginServlet extends HttpServlet {
 		
 		if(userPassword.equals(password)) {
 			
+			
+			session.setAttribute("userEmail", email);
 			resp.sendRedirect("HomePageServlet");
+			
+			
+			
 		}else {
 			resp.getWriter().println("Invalid Password");
 			return;

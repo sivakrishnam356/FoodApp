@@ -8,18 +8,22 @@ public class CartItem {
 	private String name ;
 	private double price;
 	private int quantity;
+	private String image;
 	
+	
+
 	public CartItem() {
 		
 	}
 
-	public CartItem(int id, int restaurantId,String name,  int quantity,double price) {
+	public CartItem(int id, int restaurantId,String name,  int quantity,double price,String image) {
 		
 		this.id = id;
 		this.restaurantId = restaurantId;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
+		this.image = image;
 	}
 
 	public int getId() {
@@ -59,6 +63,14 @@ public class CartItem {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 	

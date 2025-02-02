@@ -1,6 +1,7 @@
 package com.tap.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import com.tap.dao.MenuDAO;
 import com.tap.daoimplementation.Cart;
@@ -24,8 +25,11 @@ public class CartServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		System.out.println("hi");
 		try {
+			
+			
+			
 			
 			// get the cart from the session
 			session = req.getSession();
@@ -33,14 +37,14 @@ public class CartServlet extends HttpServlet {
 			Cart cart = (Cart)session.getAttribute("cart");
 			
 			// Get the restaurantId and currentRestaurant from id's;
-			
+
 			int restaurantId = Integer.parseInt(req.getParameter("restaurantId"));
 			
 			Integer currentRestaurantIdObj = (Integer) session.getAttribute("restaurantId");
 			
 			int currentRestaurantId = (currentRestaurantIdObj != null) ? currentRestaurantIdObj : -1;
 			
-			System.out.println("hii");
+			
 			
 			// check if the cart is null or not 
 			
@@ -55,9 +59,9 @@ public class CartServlet extends HttpServlet {
 			// get the action from the request
 			
 			String action = req.getParameter("action");
-			
+			System.out.println("second hi");
 			if(action.equals("add")) {
-				addToCart(req,cart);
+				addToCart(req,cart,resp);
 			}else if(action.equals("update")) {
 				updateCart(req,cart);
 			}else {
@@ -72,7 +76,10 @@ public class CartServlet extends HttpServlet {
 				session.setAttribute("restaurant", restaurant);
 			}
 			
+			session.setAttribute("totalPrice", cart.getTotalPrice());
 			resp.sendRedirect("cart.jsp");
+			
+			
 			
 		}catch(NullPointerException e) {
 			e.printStackTrace();
@@ -82,8 +89,8 @@ public class CartServlet extends HttpServlet {
 		
 	}
 
-	private void addToCart(HttpServletRequest req, Cart cart) {
-		
+	private void addToCart(HttpServletRequest req, Cart cart,HttpServletResponse resp) {
+		System.out.println("third hi");
 		int menuId = Integer.parseInt(req.getParameter("menuId"));
 		int quantity = Integer.parseInt(req.getParameter("quantity"));
 		
@@ -99,16 +106,19 @@ public class CartServlet extends HttpServlet {
 					menuItem.getRestaurantId(),
 					menuItem.getItemName(),
 					quantity,
-					menuItem.getPrice());
+					menuItem.getPrice(),menuItem.getImagePath());
 			
 			cart.addItem(cartItem);
+			
+			
 		}
-		System.out.println("ok");
+		System.out.println("fourth hi");
+		
 	}
 
 	private void updateCart(HttpServletRequest req, Cart cart) {
 		
-		
+		cart.updateItem(0, 0);
 	}
 
 	private void removeCart(HttpServletRequest req, Cart cart) {

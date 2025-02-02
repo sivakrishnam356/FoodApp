@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.tap.daoimplementation.Cart, com.tap.model.CartItem , com.tap.model.Restaurant" %>
+<%@ page import="com.tap.daoimplementation.Cart, com.tap.model.CartItem , com.tap.model.Restaurant , com.tap.model.Menu"  %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title> Cart </title>
+    <title>Cart</title>
     <link rel="stylesheet" href="cart.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
     <div class="cart-container">
         <div class="cart-header">
             <% if (restaurant != null) { %>
-                <img src="<%= restaurant.getImagePath() %>" alt="KFC Logo" class="restaurant-logo">
+                <img src="<%= restaurant.getImagePath() %>" alt="Restaurant Logo" class="restaurant-logo">
             <% } else { %>
                 <img src="placeholder-restaurant-logo.png" alt="Restaurant Logo" class="restaurant-logo">
             <% } %>
@@ -29,40 +29,52 @@
         </div>
 
         <div class="cart-items">
-            <%
-                if (cart != null && !cart.cart.isEmpty()) { // Check if cart is not empty
-                    for (CartItem cartItem : cart.cart.values()) {
+            <% if (cart != null && !cart.cart.isEmpty()) { 
+                for (CartItem cartItem : cart.cart.values()) { 
             %>
-                <div class="cart-item">
-                    <p><%= cartItem.getName() %></p>
-                    <div class="item-quantity">
-                        <button>-</button>
-                        <span class="quantity-value"><%= cartItem.getQuantity() %></span>
-                        <button>+</button>
+            <div class="cart-item">
+                <img src="<%= cartItem.getImage() %>" alt="<%= cartItem.getName() %>">
+
+                <div class="cart-item-details">
+                    <p class="item-name"><%= cartItem.getName() %></p>
+
+                    <div class="item-actions">
+                        <div class="item-quantity">
+                            <form action="CartServlet" method="GET">
+                                <input type="hidden" name="menuId" value="<%= cartItem.getId() %>">
+                                <input type="hidden" name="quantity" value="<%= cartItem.getQuantity() - 1 %>">
+                                <input type="hidden" name="action" value="update">
+                                <button class="quantity-btn" <% if(cartItem.getQuantity() == 1) { %> disabled <% } %> >-</button>
+                            </form>
+                            
+                            <span class="quantity-value"><%= cartItem.getQuantity() %></span>
+
+                            <form action="CartServlet" method="GET">
+                                <input type="hidden" name="menuId" value="<%= cartItem.getId() %>">
+                                <input type="hidden" name="quantity" value="<%= cartItem.getQuantity() + 1 %>">
+                                <input type="hidden" name="action" value="update">
+                                <button class="quantity-btn">+</button>
+                            </form>
+                        </div>
+                        <p class="item-price">₹<%= cartItem.getPrice() %></p>
                     </div>
-                    <p>₹<%= cartItem.getPrice() %></p>
                 </div>
-            <%
-                    }
-                } else {
-            %>
-                <p class="empty-cart">Your cart is empty.</p>
-            <%
-                }
-            %>
+            </div>
+            <% } 
+            } else { %>
+            <p class="empty-cart">Your cart is empty.</p>
+            <% } %>
         </div>
 
         <div class="bill-details">
             <h3>Bill Details</h3>
-            <p>Item Total <span>₹1087</span></p>
-            <p>Delivery Fee | 8.1 kms <span>₹ 91 </span></p>
-            <p>Delivery Tip <span class="add-tip">Add tip</span></p>
-            <p>Platform Fee <span>₹10</span></p>
-            <p>GST and Restaurant Charges <span>₹95.15</span></p>
+            <p>TO PAY <span>₹ <%= session.getAttribute("totalPrice") %></span></p>
         </div>
 
-        <div class="total-pay">
-            <h3>TO PAY <span>₹1283</span></h3>
+        <!-- Buttons for Add More Items and Proceed to Checkout -->
+        <div class="button-container">
+            <button class="add-more-items" onclick="window.location.href='Menu.jsp'">Add More Items</button>
+            <button class="proceed-to-checkout" onclick="window.location.href='checkout.jsp'">Proceed to Checkout</button>
         </div>
     </div>
 

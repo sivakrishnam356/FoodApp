@@ -5,17 +5,17 @@ import java.util.Date;
 public class Order {
 
 	private int orderId;
-	private int userId ;
+	private String userEmail ;
 	private int restuarantId;
 	private Date orderDate;
 	private double totalAmount;
 	private String status;
 	private String paymentMode;
-	public Order(int orderId, int userId, int restuarantId, Date orderDate, double totalAmount, String status,
+	public Order(int orderId, String userEmail, int restuarantId, Date orderDate, double totalAmount, String status,
 			String paymentMode) {
 		super();
 		this.orderId = orderId;
-		this.userId = userId;
+		this.userEmail = userEmail;
 		this.restuarantId = restuarantId;
 		this.orderDate = orderDate;
 		this.totalAmount = totalAmount;
@@ -24,6 +24,22 @@ public class Order {
 	}
 	
 	
+	
+	
+	public Order(String userEmail, int restuarantId, Date orderDate, double totalAmount, String status,
+			String paymentMode) {
+		super();
+		this.userEmail = userEmail;
+		this.restuarantId = restuarantId;
+		this.orderDate = orderDate;
+		this.totalAmount = totalAmount;
+		this.status = status;
+		this.paymentMode = paymentMode;
+	}
+
+
+
+
 	public Order() {
 		// TODO Auto-generated constructor stub
 	}
@@ -39,13 +55,13 @@ public class Order {
 	}
 
 
-	public int getUserId() {
-		return userId;
+	public String getEmail() {
+		return userEmail;
 	}
 
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
 

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Date;
@@ -16,7 +17,7 @@ import com.tap.utility.ConnectionClose;
 public class OrderDAOImplementation implements OrderDAO {
 
 	
-	private static final String INSRET_ORDER_QUERY = "INSERT into `orders` (`userId`,`restaurantId`,`orderDate`,`totalAmount`,`status`,`paymentMode`)"
+	private static final String INSRET_ORDER_QUERY = "INSERT into `orders` (`userEmail`,`restaurantId`,`orderDate`,`totalAmount`,`status`,`paymentMode`)"
 			+ "values (?,?,?,?,?,?)";
 	
 	private static final String GET_ORDER_BY_ID_QUERY = "SELECT * FROM `orders` WHERE `orderId` = ?";
@@ -32,13 +33,15 @@ public class OrderDAOImplementation implements OrderDAO {
 	static  ResultSet result;
 
 	@Override
-	public void addOrder(Order order) {
+	public int addOrder(Order order) {
 		connection = DBConnection.getConnection();
-		
+		int orderId = 0;
 		try {
-			prepareStatement = connection.prepareStatement(INSRET_ORDER_QUERY);
+			//prepareStatement = connection.prepareStatement(INSRET_ORDER_QUERY);
 			
-			prepareStatement.setInt(1,order.getUserId());
+			prepareStatement = connection.prepareStatement(INSRET_ORDER_QUERY,Statement.RETURN_GENERATED_KEYS);
+			
+			prepareStatement.setString(1,order.getEmail());
 			prepareStatement.setInt(2, order.getRestuarantId());
 			prepareStatement.setDate(3, (Date) order.getOrderDate());
 			prepareStatement.setDouble(4, order.getTotalAmount());
@@ -47,12 +50,21 @@ public class OrderDAOImplementation implements OrderDAO {
 			
 			
 			prepareStatement.executeUpdate();
+			ResultSet generatedKeys = prepareStatement.getGeneratedKeys();
+			
+			while(generatedKeys.next()) {
+				orderId = generatedKeys.getInt(1);
+			}
+			
+	
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
 		}finally {
 			ConnectionClose.closeResources(connection, prepareStatement, result);
 		}
+		
+		return orderId;
 		
 	}
 
@@ -86,7 +98,7 @@ public class OrderDAOImplementation implements OrderDAO {
 		try {
 			prepareStatement = connection.prepareStatement(UPDATE_ORDER_QUERY);
 			
-			prepareStatement.setInt(1, order.getUserId());
+			prepareStatement.setString(1, order.getEmail());
 			prepareStatement.setInt(2, order.getRestuarantId());
 			prepareStatement.setDouble(3, order.getTotalAmount());
 			prepareStatement.setDate(4, (Date) order.getOrderDate());
@@ -160,7 +172,7 @@ public class OrderDAOImplementation implements OrderDAO {
 		
 		Order order = new Order(
 				result.getInt("orderId"),
-				result.getInt("userId"),
+				result.getString("userEmail"),
 				result.getInt("restaurantId"),
 				result.getDate("orderDate"),
 				result.getDouble("totalAmount"),

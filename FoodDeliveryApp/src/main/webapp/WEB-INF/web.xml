@@ -59,4 +59,34 @@
     <servlet-name>CartServlet</servlet-name>
     <url-pattern>/CartServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CheckoutServlet</display-name>
+    <servlet-name>CheckoutServlet</servlet-name>
+    <servlet-class>com.tap.servlet.CheckoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckoutServlet</servlet-name>
+    <url-pattern>/CheckoutServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>OrderServlet</display-name>
+    <servlet-name>OrderServlet</servlet-name>
+    <servlet-class>com.tap.servlet.OrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderServlet</servlet-name>
+    <url-pattern>/OrderServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>OrderItemServlet</display-name>
+    <servlet-name>OrderItemServlet</servlet-name>
+    <servlet-class>com.tap.servlet.OrderItemServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderItemServlet</servlet-name>
+    <url-pattern>/OrderItemServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

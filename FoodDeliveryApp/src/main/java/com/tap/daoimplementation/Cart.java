@@ -25,6 +25,8 @@ public class Cart {
 		}else {
 			cart.put(cartItemId, cartItem);
 		}
+		
+		
 	}
 	
 	public void updateItem(int cartItemId , int quantity) {
@@ -53,7 +55,11 @@ public class Cart {
 	
 	public double getTotalPrice() {
 		
-		return 5.0;
+		double total = 0.0;
+	    for (CartItem item : cart.values()) {
+	        total += item.getPrice() * item.getQuantity();
+	    }
+	    return total;
 	}
 	
 	public void clear() {

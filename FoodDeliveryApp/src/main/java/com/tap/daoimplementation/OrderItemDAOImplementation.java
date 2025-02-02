@@ -17,7 +17,7 @@ import com.tap.utility.ConnectionClose;
 public class OrderItemDAOImplementation implements OrderItemDAO{
 
 	
-	private static final String INSERT_ORDERITEM_QUERY = "INSERT into `orderitem` (`orderId`,`menuId`,`quantity`,`totalPrice`)"
+	private static final String INSERT_ORDERITEM_QUERY = "INSERT into `orderitem` (`orderId`,`menuId`,`quantity`,`price`)"
 			+ "values (?,?,?,?)";
 	
 	private static final String GET_ORDERITEM_BY_ID_QUERY = "SELECT * FROM `orderitem` WHERE `orderItemId` = ?";
@@ -52,7 +52,7 @@ public class OrderItemDAOImplementation implements OrderItemDAO{
 			prepareStatement.setInt(1,orderItem.getOrderId());
 			prepareStatement.setInt(2, orderItem.getMenuId());
 			prepareStatement.setInt(3, orderItem.getQuantity());
-			prepareStatement.setDouble(4, orderItem.getTotalPrice());
+			prepareStatement.setDouble(4, orderItem.getPrice());
 			
 			
 			
@@ -99,7 +99,7 @@ public class OrderItemDAOImplementation implements OrderItemDAO{
 			prepareStatement.setInt(1, orderItem.getOrderId());
 			prepareStatement.setInt(2, orderItem.getMenuId());
 			prepareStatement.setInt(3, orderItem.getQuantity());
-			prepareStatement.setDouble(4, orderItem.getTotalPrice());
+			prepareStatement.setDouble(4, orderItem.getPrice());
 			prepareStatement.setInt(5, orderItemId);
 			
 			prepareStatement.executeUpdate();
@@ -179,7 +179,7 @@ public class OrderItemDAOImplementation implements OrderItemDAO{
 				result.getInt("orderId"),
 				result.getInt("menuId"),
 				result.getInt("quantity"),
-				result.getDouble("totalPrice"));
+				result.getDouble("price"));
 				
 				
 		return orderItem;

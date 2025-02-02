@@ -7,7 +7,7 @@ import com.tap.model.User;
 
 public interface OrderDAO {
 
-	void addOrder(Order order);
+	int addOrder(Order order);
 	Order getOrder(int orderId);
 	void updateOrder(Order order,int orderId);
 	void deleteOrder(int orderId);

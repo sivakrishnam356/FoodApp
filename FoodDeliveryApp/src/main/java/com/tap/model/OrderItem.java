@@ -6,14 +6,22 @@ public class OrderItem {
 	private int orderId;
 	private int menuId;
 	private int quantity;
-	private double totalPrice;
-	public OrderItem(int orderItemId, int orderId, int menuId, int quantity, double totalPrice) {
+	private double price;
+	public OrderItem(int orderItemId, int orderId, int menuId, int quantity, double price) {
 		super();
 		this.orderItemId = orderItemId;
 		this.orderId = orderId;
 		this.menuId = menuId;
 		this.quantity = quantity;
-		this.totalPrice = totalPrice;
+		this.price = price;
+	}
+	public OrderItem(int orderId, int menuId, int quantity, double totalPrice) {
+		super();
+		
+		this.orderId = orderId;
+		this.menuId = menuId;
+		this.quantity = quantity;
+		this.price = totalPrice;
 	}
 	
 	public OrderItem() {
@@ -52,18 +60,18 @@ public class OrderItem {
 		this.quantity = quantity;
 	}
 
-	public double getTotalPrice() {
-		return totalPrice;
+	public double getPrice() {
+		return price;
 	}
 
-	public void setTotalPrice(double totalPrice) {
-		this.totalPrice = totalPrice;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 	
 	@Override
 	public String toString() {
 		
-		return orderItemId + " " + orderId + " " + menuId + " " + quantity + " " + totalPrice;
+		return orderItemId + " " + orderId + " " + menuId + " " + quantity + " " + price;
 	}
 	
 	
