@@ -209,7 +209,7 @@ footer {
         <nav>
             <ul>
                 <li><a href="HomePage.jsp">Home</a></li>
-                <li><a href="OrdersServlet">MyOrders</a></li>
+                <li><a href="FetchOrderServlet">MyOrders</a></li>
                 <li><a href="about.jsp">About</a></li>
                 <li><a href="contact.jsp">Contact</a></li>
                 <li><a href="profile.jsp">Profile</a></li>
@@ -262,13 +262,13 @@ footer {
                     <h4>Company</h4>
                     <ul>
                         <li><a href="#">About Us</a></li>
-                        <li><a href="#">Swiggy Corporate</a></li>
+                        <li><a href="#">Food Delight Corporate</a></li>
                         <li><a href="#">Careers</a></li>
                         <li><a href="#">Team</a></li>
-                        <li><a href="#">Swiggy One</a></li>
-                        <li><a href="#">Swiggy Instamart</a></li>
-                        <li><a href="#">Swiggy Dineout</a></li>
-                        <li><a href="#">Swiggy Genie</a></li>
+                        <li><a href="#">Food Delight One</a></li>
+                        <li><a href="#">Food Delight Instamart</a></li>
+                        <li><a href="#">Food Delight Dineout</a></li>
+                        <li><a href="#">Food Delight Genie</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -290,10 +290,10 @@ footer {
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Explore with Swiggy</h4>
+                    <h4>Explore with Food Delight</h4>
                     <ul>
-                        <li><a href="#">Life at Swiggy</a></li>
-                        <li><a href="#">Swiggy News</a></li>
+                        <li><a href="#">Life at Food Delight</a></li>
+                        <li><a href="#">Food Delight News</a></li>
                         <li><a href="#">Snackables</a></li>
                     </ul>
                 </div>

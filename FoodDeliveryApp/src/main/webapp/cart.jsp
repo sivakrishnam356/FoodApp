@@ -40,21 +40,30 @@
 
                     <div class="item-actions">
                         <div class="item-quantity">
-                            <form action="CartServlet" method="GET">
-                                <input type="hidden" name="menuId" value="<%= cartItem.getId() %>">
-                                <input type="hidden" name="quantity" value="<%= cartItem.getQuantity() - 1 %>">
-                                <input type="hidden" name="action" value="update">
-                                <button class="quantity-btn" <% if(cartItem.getQuantity() == 1) { %> disabled <% } %> >-</button>
-                            </form>
-                            
-                            <span class="quantity-value"><%= cartItem.getQuantity() %></span>
+							<form action="CartServlet" method="GET">
+								<input type="hidden" name="menuId"
+									value="<%=cartItem.getId()%>"> <input type="hidden"
+									name="restaurantId" value="<%=restaurant.getRestaurantId()%>">
+								<input type="hidden" name="quantity"
+									value="<%=cartItem.getQuantity() - 1%>"> <input
+									type="hidden" name="action" value="update">
+								<button class="quantity-btn"
+									<%if (cartItem.getQuantity() == 1) {%> disabled <% } %>>-</button>
+							</form>
+
+
+							<span class="quantity-value"><%= cartItem.getQuantity() %></span>
 
                             <form action="CartServlet" method="GET">
-                                <input type="hidden" name="menuId" value="<%= cartItem.getId() %>">
-                                <input type="hidden" name="quantity" value="<%= cartItem.getQuantity() + 1 %>">
-                                <input type="hidden" name="action" value="update">
-                                <button class="quantity-btn">+</button>
-                            </form>
+								<input type="hidden" name="menuId"
+									value="<%=cartItem.getId()%>"> <input type="hidden"
+									name="restaurantId" value="<%=restaurant.getRestaurantId()%>">
+								<input type="hidden" name="quantity"
+									value="<%=cartItem.getQuantity() + 1%>"> <input
+									type="hidden" name="action" value="update">
+								<button type = "submit" class="quantity-btn"
+									>+</button>
+							</form>
                         </div>
                         <p class="item-price">₹<%= cartItem.getPrice() %></p>
                     </div>

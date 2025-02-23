@@ -16,18 +16,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 
-
-public class OrderItemServlet extends HttpServlet {
+@WebServlet("/FetchOrderServlet")
+public class FetchOrderServlet extends HttpServlet {
 	
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-//		HttpSession session = req.getSession();
-//		
-//		int orderId = Integer.parseInt((String) session.getAttribute("orderId"));
-//		
-//		//Order orders = new Order();
+		
 		
 		OrderDAOImplementation orderdao = new OrderDAOImplementation();
 		
@@ -37,11 +33,13 @@ public class OrderItemServlet extends HttpServlet {
 		
 		
 		
+		HttpSession session = req.getSession();
+		
+		session.setAttribute("allOrdersList", allOrders);
 		
 		
 		
-		
-		
+		resp.sendRedirect("fetchorders.jsp");
 		
 		
 		 

@@ -8,10 +8,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
-    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="menupage.css">
 </head>
 
 <body>
+    <!-- Header Section -->
     <!-- Header Section -->
     <!-- Header Section -->
     <header>
@@ -19,7 +20,7 @@
         <nav>
             <ul>
                 <li><a href="HomePage.jsp">Home</a></li>
-                <li><a href="OrdersServlet">MyOrders</a></li>
+                <li><a href="FetchOrderServlet">MyOrders</a></li>
                 <li><a href="about.jsp">About</a></li>
                 <li><a href="contact.jsp">Contact</a></li>
                 <li><a href="profile.jsp">Profile</a></li>
@@ -62,7 +63,9 @@
 									class="quantity-input">
 							</div>
 							<input type="hidden" name="action" value="add">
-							<button onclick="countCart(  <%= menu.getPrice() %>)" class="add-to-cart-btn">Add to Cart</button>
+							<button onclick="addItemToCart('<%= menu.getItemName() %>')" class="add-to-cart-btn">
+                            	Add to Cart
+                       		</button>
 						</form>
 			</div>
                     </div>
@@ -126,27 +129,46 @@
     </footer>
 
 
-	<script>
-		let cartItems = []; // Array to store unique items
-		let cartCount = 0; // Cart count
-
-		function addItemToCart(itemName) {
-			// Check if the item already exists in the cart
-			if (!cartItems.includes(itemName)) {
-				cartItems.push(itemName); // Add new item to cart
-				cartCount++; // Increase the cart count
-			}
-			updateCartCount(); // Update the cart count display
-		}
-
-		function updateCartCount() {
-			// Update the cart count displayed in the header
-			document.getElementById('cartCount').textContent = cartCount;
-		}
+		<script>
+		    // Retrieve the cart items from localStorage (if any), or initialize an empty array
+		    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+		
+		    // Function to add items to the cart and update the cart count
+		    function addItemToCart(menuId, itemName) {
+		        // Check if the item already exists in the cart
+		        let existingItem = cartItems.find(item => item.menuId === menuId);
+		        
+		        if (existingItem) {
+		            // If item already exists, increment the quantity
+		            existingItem.quantity++;
+		        } else {
+		            // Otherwise, add a new item to the cart
+		            cartItems.push({ menuId: menuId, itemName: itemName, quantity: 1 });
+		        }
+		
+		        // Save the updated cart items back to localStorage
+		        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+		
+		        // Update the cart count
+		        updateCartCount();
+		    }
+		
+		    // Update the cart count displayed in the header
+		    function updateCartCount() {
+		        // The cart count is the total quantity of all items in the cart
+		        let totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+		        document.getElementById('cartCount').textContent = totalQuantity;
+		    }
+		
+		    // On page load, update the cart count
+		    window.onload = function() {
+		        updateCartCount();
+		    };
 	</script>
 
 
 
 </body>
 
-</html>
+</html>    
+

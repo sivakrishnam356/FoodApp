@@ -9,9 +9,6 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		Date today = new Date(0, 0, 0);
-		Order order = new Order(1000,1,1,today,1900,"delivered","UPI");
-		
 		OrderDAOImplementation o = new OrderDAOImplementation();
 		
 //		o.addOrder(order);

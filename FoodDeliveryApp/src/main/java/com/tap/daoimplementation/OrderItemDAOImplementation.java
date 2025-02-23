@@ -17,16 +17,16 @@ import com.tap.utility.ConnectionClose;
 public class OrderItemDAOImplementation implements OrderItemDAO{
 
 	
-	private static final String INSERT_ORDERITEM_QUERY = "INSERT into `orderitem` (`orderId`,`menuId`,`quantity`,`price`)"
-			+ "values (?,?,?,?)";
+	private static final String INSERT_ORDERITEM_QUERY = "INSERT into `orderitem` (`orderId`,`menuId`,`orderName`,`quantity`,`price`)"
+			+ "values (?,?,?,?,?)";
 	
 	private static final String GET_ORDERITEM_BY_ID_QUERY = "SELECT * FROM `orderitem` WHERE `orderItemId` = ?";
 	
-	private static final String UPDATE_ORDERITEM_QUERY = "UPDATE `orderitem` SET orderId = ?,menuId = ?,quantity = ?, totalPrice = ?  WHERE `orderItemID` = ?";	
+	private static final String UPDATE_ORDERITEM_QUERY = "UPDATE `orderitem` SET orderId = ?,menuId = ?, orderName = ? , quantity = ?, totalPrice = ?  WHERE `orderItemID` = ?";	
 	
 	private static final String DELETE_ORDERITEM_QUERY = "DELETE FROM `orderitem` WHERE `orderItemId` = ?";
 	
-	private static final String GET_ALL_ORDERITEMS_QUERY = "SELECT * FROM `orderitem`";
+	private static final String GET_ALL_ORDERITEMS_QUERY = "SELECT * FROM `orderitem` where orderId = ?";
 	static Connection connection ;
 	static PreparedStatement prepareStatement;
 
@@ -46,13 +46,17 @@ public class OrderItemDAOImplementation implements OrderItemDAO{
 	public void addOrderItem(OrderItem orderItem) {
 		connection = DBConnection.getConnection();
 		
+		System.out.println(orderItem.getOrderName());
+		
 		try {
 			prepareStatement = connection.prepareStatement(INSERT_ORDERITEM_QUERY);
 			
 			prepareStatement.setInt(1,orderItem.getOrderId());
 			prepareStatement.setInt(2, orderItem.getMenuId());
-			prepareStatement.setInt(3, orderItem.getQuantity());
-			prepareStatement.setDouble(4, orderItem.getPrice());
+			prepareStatement.setString(3, orderItem.getOrderName());
+			
+			prepareStatement.setInt(4, orderItem.getQuantity());
+			prepareStatement.setDouble(5, orderItem.getPrice());
 			
 			
 			
@@ -79,7 +83,9 @@ public class OrderItemDAOImplementation implements OrderItemDAO{
 			
 			result = prepareStatement.executeQuery();
 			
-			orderItem = extractOrderItem(result);
+			if(result.next()) {
+				orderItem = extractOrderItem(result);
+			}
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -98,9 +104,11 @@ public class OrderItemDAOImplementation implements OrderItemDAO{
 			
 			prepareStatement.setInt(1, orderItem.getOrderId());
 			prepareStatement.setInt(2, orderItem.getMenuId());
-			prepareStatement.setInt(3, orderItem.getQuantity());
-			prepareStatement.setDouble(4, orderItem.getPrice());
-			prepareStatement.setInt(5, orderItemId);
+			prepareStatement.setString(3, orderItem.getOrderName());
+			
+			prepareStatement.setInt(4, orderItem.getQuantity());
+			prepareStatement.setDouble(5, orderItem.getPrice());
+			prepareStatement.setInt(6, orderItemId);
 			
 			prepareStatement.executeUpdate();
 			
@@ -135,7 +143,7 @@ public class OrderItemDAOImplementation implements OrderItemDAO{
 	}
 
 	@Override
-	public List<OrderItem> getAllOrderItems() {
+	public List<OrderItem> getAllOrderItems(int orderId) {
 		connection = DBConnection.getConnection();
 		
 		OrderItem orderItem = null ;
@@ -145,6 +153,8 @@ public class OrderItemDAOImplementation implements OrderItemDAO{
 		try {
 			prepareStatement = connection.prepareStatement(GET_ALL_ORDERITEMS_QUERY);
 			
+			
+			prepareStatement.setInt(1, orderId);
 			
 			result = prepareStatement.executeQuery();
 			
@@ -177,6 +187,7 @@ public class OrderItemDAOImplementation implements OrderItemDAO{
 		OrderItem orderItem = new OrderItem(
 				result.getInt("orderItemId"),
 				result.getInt("orderId"),
+				result.getString("orderName"),
 				result.getInt("menuId"),
 				result.getInt("quantity"),
 				result.getDouble("price"));

@@ -1,5 +1,4 @@
-package com.tap.servlet;
-
+ package com.tap.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -25,11 +24,10 @@ public class CartServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("hi");
+		
 		try {
 			
-			
-			
+			System.out.println("Tap");
 			
 			// get the cart from the session
 			session = req.getSession();
@@ -59,10 +57,13 @@ public class CartServlet extends HttpServlet {
 			// get the action from the request
 			
 			String action = req.getParameter("action");
-			System.out.println("second hi");
+			
 			if(action.equals("add")) {
+				
 				addToCart(req,cart,resp);
+				
 			}else if(action.equals("update")) {
+				System.out.println("pG");
 				updateCart(req,cart);
 			}else {
 				removeCart(req,cart);
@@ -77,6 +78,7 @@ public class CartServlet extends HttpServlet {
 			}
 			
 			session.setAttribute("totalPrice", cart.getTotalPrice());
+			
 			resp.sendRedirect("cart.jsp");
 			
 			
@@ -90,11 +92,11 @@ public class CartServlet extends HttpServlet {
 	}
 
 	private void addToCart(HttpServletRequest req, Cart cart,HttpServletResponse resp) {
-		System.out.println("third hi");
+		
 		int menuId = Integer.parseInt(req.getParameter("menuId"));
 		int quantity = Integer.parseInt(req.getParameter("quantity"));
 		
-		System.out.println("Bye");
+		
 		MenuDAO menudao = new MenuDAOImplementation();
 		
 		Menu menuItem = menudao.getMenu(menuId);
@@ -112,13 +114,38 @@ public class CartServlet extends HttpServlet {
 			
 			
 		}
-		System.out.println("fourth hi");
+		
 		
 	}
 
 	private void updateCart(HttpServletRequest req, Cart cart) {
 		
-		cart.updateItem(0, 0);
+		 if (cart == null) {
+		        return;
+		    }
+
+		    try {
+		        int menuId = Integer.parseInt(req.getParameter("menuId"));
+		        int quantity = Integer.parseInt(req.getParameter("quantity"));
+
+		        // Ensure valid quantity
+		        if (quantity < 0) {
+		            quantity = 0; 
+		        }
+
+		        System.out.println("7G");
+		        cart.updateItem(menuId, quantity);
+
+		        // Update session with modified cart
+		        HttpSession session = req.getSession();
+		        session.setAttribute("cart", cart);
+		        session.setAttribute("totalPrice", cart.getTotalPrice());
+		        
+		        System.out.println("Bye G");
+
+		    } catch (NumberFormatException e) {
+		        e.printStackTrace();
+		    }
 	}
 
 	private void removeCart(HttpServletRequest req, Cart cart) {

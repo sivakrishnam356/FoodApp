@@ -51,6 +51,8 @@ public class OrderServlet extends HttpServlet {
 		
 		String paymentType = req.getParameter("payment-method");
 		
+		
+		
 		// creating order object 
 		Order orders = new Order(userEmail,restaurantId,sqlOrderDate,totalAmount,status,paymentType);
 		
@@ -59,9 +61,13 @@ public class OrderServlet extends HttpServlet {
 	
 		int orderId = orderdao.addOrder(orders);
 		
+		  HttpSession session = req.getSession();
+		  
+		 
+		
 		
 		// Get the Cart from the session
-        HttpSession session = req.getSession();
+      
         Cart cart = (Cart) session.getAttribute("cart");
         Restaurant restaurant = (Restaurant) session.getAttribute("restaurant");
         
@@ -69,8 +75,10 @@ public class OrderServlet extends HttpServlet {
         // creating OrderItem object
         
         for (CartItem cartItem : cart.cart.values()) {
+        	
+        	
 			
-            OrderItem orderItem = new OrderItem(orderId,cartItem.getId()
+            OrderItem orderItem = new OrderItem(orderId,cartItem.getId(),cartItem.getName()
             		,cartItem.getQuantity(),cartItem.getPrice());
             
             OrderItemDAOImplementation orderItemdao = new OrderItemDAOImplementation();
@@ -79,6 +87,8 @@ public class OrderServlet extends HttpServlet {
 		}
 		
 		// redirecting to success page
+        
+        req.setAttribute("orderId", orderId);
 		RequestDispatcher rd = req.getRequestDispatcher("sucess.jsp");
 		rd.forward(req, resp);
 		

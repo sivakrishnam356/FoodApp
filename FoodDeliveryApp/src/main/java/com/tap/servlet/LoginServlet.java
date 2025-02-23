@@ -20,11 +20,15 @@ public class LoginServlet extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 		
+		
+		
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
 		
+		
+		
 		if(email == null || password == null) {
-			resp.getWriter().println("Invalid email or password");
+			resp.getWriter().println("Invalid email or password kadhu ");
 			return ;
 		}
 		
@@ -52,9 +56,6 @@ public class LoginServlet extends HttpServlet {
 			resp.getWriter().println("Invalid Password");
 			return;
 		}
-		
-		
-		
 		
 	}
 }
