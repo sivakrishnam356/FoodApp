@@ -35,12 +35,12 @@ The application is built using Java, JSP, Servlets, Hibernate, and MySQL for bac
 
 ## Screenshots
 
-![Login Page](./src/main/webapp/images/screenshoots/readme/login.jpeg)
-![Register Page ](./src/main/webapp/images/screenshoots/readme/register.jpeg)
-![Home Page](./src/main/webapp/images/screenshoots/readme/restaurant.jpeg)
-![Restaurants Page](./src/main/webapp/images/screenshoots/readme/menu.jpeg)
-![Menu Page](./src/main/webapp/images/screenshoots/readme/cart.jpeg)
-![Cart Page](./src/main/webapp/images/screenshoots/readme/checkout.jpeg)
-![Checkout Page](./src/main/webapp/images/screenshoots/readme/success.jpeg)
-![Order History Page](./src/main/webapp/images/screenshoots/readme/orders.jpeg)
+![Login Page](FoodDeliveryApp/src/main/webapp/images/login.jpeg)
+![Register Page ](FoodDeliveryApp/src/main/webapp/images/register.jpeg)
+![Home Page](FoodDeliveryApp/src/main/webapp/images/restaurant.jpeg)
+![Restaurants Page](FoodDeliveryApp/src/main/webapp/images/menu.jpeg)
+![Menu Page](FoodDeliveryApp/src/main/webapp/images/cart.jpeg)
+![Cart Page](FoodDeliveryApp/src/main/webapp/images/checkout.jpeg)
+![Checkout Page](FoodDeliveryApp/src/main/webapp/images/success.jpeg)
+![Order History Page](FoodDeliveryApp/src/main/webapp/images/orders.jpeg)
 
