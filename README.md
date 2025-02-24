@@ -35,12 +35,12 @@ The application is built using Java, JSP, Servlets, Hibernate, and MySQL for bac
 
 ## Screenshots
 
-![Login Page](./src/main/webapp/images/screenshoots/readme/login)
-![Register Page ](./src/main/webapp/images/screenshoots/readme/register)
-![Home Page](./src/main/webapp/images/screenshoots/readme/restaurant)
-![Restaurants Page](./src/main/webapp/images/screenshoots/readme/menu)
-![Menu Page](./src/main/webapp/images/screenshoots/readme/cart)
-![Cart Page](./src/main/webapp/images/screenshoots/readme/checkout)
-![Checkout Page](./src/main/webapp/images/screenshoots/readme/success)
-![Order History Page](./src/main/webapp/images/screenshoots/readme/orders)
+![Login Page](./src/main/webapp/images/screenshoots/readme/login.jpeg)
+![Register Page ](./src/main/webapp/images/screenshoots/readme/register.jpeg)
+![Home Page](./src/main/webapp/images/screenshoots/readme/restaurant.jpeg)
+![Restaurants Page](./src/main/webapp/images/screenshoots/readme/menu.jpeg)
+![Menu Page](./src/main/webapp/images/screenshoots/readme/cart.jpeg)
+![Cart Page](./src/main/webapp/images/screenshoots/readme/checkout.jpeg)
+![Checkout Page](./src/main/webapp/images/screenshoots/readme/success.jpeg)
+![Order History Page](./src/main/webapp/images/screenshoots/readme/orders.jpeg)
 
