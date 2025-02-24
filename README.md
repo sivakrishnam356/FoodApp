@@ -35,12 +35,12 @@ The application is built using Java, JSP, Servlets, Hibernate, and MySQL for bac
 
 ## Screenshots
 
-![Login Page](FoodDeliveryApp/src/main/webapp/images/login.jpeg)
-![Register Page ](FoodDeliveryApp/src/main/webapp/images/register.jpeg)
-![Home Page](FoodDeliveryApp/src/main/webapp/images/restaurant.jpeg)
-![Restaurants Page](FoodDeliveryApp/src/main/webapp/images/menu.jpeg)
-![Menu Page](FoodDeliveryApp/src/main/webapp/images/cart.jpeg)
-![Cart Page](FoodDeliveryApp/src/main/webapp/images/checkout.jpeg)
-![Checkout Page](FoodDeliveryApp/src/main/webapp/images/success.jpeg)
-![Order History Page](FoodDeliveryApp/src/main/webapp/images/orders.jpeg)
+![Login Page](FoodDeliveryApp/src/main/webapp/images/login.png)
+![Register Page ](FoodDeliveryApp/src/main/webapp/images/register.png)
+![Home Page](FoodDeliveryApp/src/main/webapp/images/restaurant.png)
+![Restaurants Page](FoodDeliveryApp/src/main/webapp/images/menu.png)
+![Menu Page](FoodDeliveryApp/src/main/webapp/images/cart.png)
+![Cart Page](FoodDeliveryApp/src/main/webapp/images/checkout.png)
+![Checkout Page](FoodDeliveryApp/src/main/webapp/images/success.png)
+![Order History Page](FoodDeliveryApp/src/main/webapp/images/orders.png)
 
